@@ -5,7 +5,14 @@ import bcrypt from "bcrypt"
 const signUp = async (req, res, next) => {
     try {
         const { name, class: className, email, password } = req.body
+
+        const existingUser = await userModel.findOne({email});
+        console.log(existingUser)
+        if(existingUser){
+            return sendToken(res,401,existingUser, `Already exists an account...!`)
+        }
         const user = await userModel.create({ name, class:className, email, password })
+        console.log(user, "From Auth User")
         sendToken(res, 201, user, `welcome ${user.name}`)
     } catch (err) {
         

@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
-import { useLoadAttendanceSheet } from '../hooks/api'
+// import { useLoadAttendanceSheet } from '../hooks/api'
 import AttendanceSheet from '../components/shared/AttendanceSheet'
+import axios from 'axios'
+import { server } from '../constants/config'
 
 const Attendance = () => {
     // const [students, setStudents] = useState([])
     const [attendanceData, setAttendanceData] = useState({})
-    const [standard,setStandard]=useState(0)
-    const {sheet,loading:sheetLoading,error:sheetError}=useLoadAttendanceSheet(standard)
+    const [sheet,setSheet]=useState([])
+    // const {sheet,loading:sheetLoading,error:sheetError}=useLoadAttendanceSheet(standard);
+
     const handleAttendanceChange = (studentId, value) => {
         setAttendanceData(prev => ({
             ...prev,
@@ -18,11 +21,23 @@ const Attendance = () => {
         console.log(attendanceData)
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const handleSubmit = async(e) => {
+        e.preventDefault();
         const formdata=new FormData(e.target)
-        setStandard(parseInt(formdata.get('class')))
-        // formdata.reset()
+        
+        try {
+            const {data} = await axios.post(`${server}/api/admin/create-attendance`,{
+                standard:parseInt(formdata.get("class"))
+            },{withCrendential:true})
+
+            console.log(data)
+            if(data.success){
+              setSheet(data.sheet)
+            }
+          } catch (error) {
+            console.log(error.response.data.message)
+            console.log(error.message)
+          }
     }
 
     return (
@@ -44,7 +59,7 @@ const Attendance = () => {
                             <button
                             type='submit'
                             className='px-4 my-4  text-sm py-2 rounded-md shadow bg-blue-600 text-white'
-                            disabled={sheetLoading}
+                            // disabled={sheetLoading}
                             >
                                 Submit
                                 {/* {sheetLoading?<Lod:"Submit"} */}
