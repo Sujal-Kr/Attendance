@@ -41,10 +41,7 @@ const createAttendanceSheet = async (req, res, next) => {
                 $gte: dayjs().startOf('day').toDate(),
                 $lt: dayjs().endOf('day').toDate()
             }
-        }).populate({
-            path: 'students.details',
-            select: 'name email' // Select specific fields to populate
-        })
+        }).populate("students.details","name email")
 
         if (existingSheet) {
             return res.status(200).json({
@@ -55,23 +52,20 @@ const createAttendanceSheet = async (req, res, next) => {
         }
 
         // Find students for the standard
-        const students = await userModel.find({ standard });
-
+        const students = await userModel.find({ class:standard });
+        // console.log(students)
         // Create new attendance sheet
         const newSheet = await attendanceModel.create({
             standard,
             date: formattedDate,
             students: students.map(student => ({
                 details: student._id,
-                status: 'present' // Default status
+                status: 'absent' // Default status
             }))
         });
 
         // Populate the created sheet
-        const populatedSheet = await attendanceModel.findById(newSheet._id).populate({
-            path: 'students.details',
-            select: 'name email' // Select specific fields to populate
-        });
+        const populatedSheet = await attendanceModel.findById(newSheet._id).populate("students.details","name email");
 
         return res.status(201).json({
             message: 'Attendance Sheet Created',

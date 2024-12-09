@@ -28,15 +28,15 @@ const Attendance = () => {
         try {
             const {data} = await axios.post(`${server}/api/admin/create-attendance`,{
                 standard:parseInt(formdata.get("class"))
-            },{withCrendential:true})
+            },{withCredentials:true})
 
             console.log(data)
             if(data.success){
               setSheet(data.sheet)
             }
           } catch (error) {
-            console.log(error.response.data.message)
-            console.log(error.message)
+            console.log(error.response.data.message || error.message)
+            
           }
     }
 
