@@ -28,7 +28,7 @@ const Attendance = () => {
         try {
             const {data} = await axios.post(`${server}/api/admin/create-attendance`,{
                 standard:parseInt(formdata.get("class"))
-            },{withCrendential:true})
+            },{withCredentials:true})
 
             console.log(data)
             if(data.success){
@@ -66,7 +66,7 @@ const Attendance = () => {
                             </button>
                         </form>
                     </div>
-                        <AttendanceSheet sheet={sheet}/>
+                        <AttendanceSheet sheet={sheet?.students}/>
                 </div>
             </div>
         </div>
