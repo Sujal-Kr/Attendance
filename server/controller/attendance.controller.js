@@ -106,7 +106,7 @@ const markMyAttendance = async (req, res, next) => {
 
         await sheet.save()
 
-        return res.stastus(200).json({
+        return res.status(200).json({
             success: true,
             message: 'Attendance Marked',
         })
@@ -127,7 +127,7 @@ const sendCodeToStudent = async (req, res, next) => {
                 return next(new ApiError("Failed to send Code", 404))
             }
             const code=uuid()
-            emitEvent(ROLL_CALL,req,details,code)
+            emitEvent(ROLL_CALL,req,details,{code, sheetId: _id})
             student.code = code
             student.save()
         })
