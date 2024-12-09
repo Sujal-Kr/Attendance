@@ -36,13 +36,13 @@ function SignUp() {
 
   
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-6 p-8 bg-white rounded-xl shadow-lg">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-200 to-blue-300 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-6 p-8 bg-white rounded-xl shadow-lg border border-gray-300">
         <div className="text-center">
-          <h2 className="mt-4 text-3xl font-bold text-gray-900">
+          <h2 className="mt-4 text-3xl font-bold text-gray-800">
             Create Account
           </h2>
-          <p className="mt-2 text-xs text-gray-600">
+          <p className="mt-2 text-sm text-gray-600">
             Join us to get started
           </p>
         </div>
@@ -54,7 +54,7 @@ function SignUp() {
               name="name"
               type="text"
               required
-              className="block w-full px-3 py-2 text-sm border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+              className="block w-full px-3 py-2 text-sm border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
               placeholder="Enter your full name"
             />
 
@@ -63,7 +63,7 @@ function SignUp() {
               name="class"
               type="text"
               required
-              className="block w-full px-3 py-2 text-sm border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+              className="block w-full px-3 py-2 text-sm border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
               placeholder="Enter your class"
             />
 
@@ -72,7 +72,7 @@ function SignUp() {
               name="email"
               type="email"
               required
-              className="block w-full px-3 py-2 text-sm border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+              className="block w-full px-3 py-2 text-sm border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
               placeholder="Enter your email"
             />
 
@@ -81,14 +81,14 @@ function SignUp() {
               name="password"
               type="password"
               required
-              className="block w-full px-3 py-2 text-sm border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+              className="block w-full px-3 py-2 text-sm border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
               placeholder="Create a password"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full flex justify-center py-2 px-4 text-sm border border-transparent rounded-lg shadow-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-200"
+            className="w-full flex justify-center py-2 px-4 text-sm border border-transparent rounded-lg shadow-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition duration-200"
           >
             Create Account
           </button>
@@ -96,7 +96,7 @@ function SignUp() {
 
         <div className="text-center text-xs">
           <span className="text-gray-600">Already have an account?</span>{' '}
-          <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150">
+          <Link to="/login" className="font-medium text-purple-600 hover:text-purple-500 transition duration-150">
             Sign in
           </Link>
         </div>
