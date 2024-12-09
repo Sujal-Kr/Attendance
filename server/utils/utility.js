@@ -29,17 +29,20 @@ const sendToken = (res, code, user, message) => {
 
 export const getSocketIds = (user)=>{
     console.log(user)
-
-    return userSocketIds.get(user)
+    
+    return userSocketIds.get(user.toString())
 }
 
 
 const emitEvent=(event,req,user,data)=>{
     try {
+
+        const io=req.app.get('io')
         
-        const io=req.get('io')
         const socketIds=getSocketIds(user)
+        
         io.to(socketIds).emit(event,data)
+        console.log(event+ " emmited")
 
     } catch (err) {
         console.log("socket error: " + err.message)

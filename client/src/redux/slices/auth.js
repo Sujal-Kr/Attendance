@@ -3,6 +3,7 @@ const initialState={
     user:null,
     isAdmin:false,
     loader:true,
+    sheet:1454
 }
 const authSlice = createSlice({
     name:'auth',
@@ -15,9 +16,13 @@ const authSlice = createSlice({
         userNotExists:(state)=>{
             state.user = null,
             state.loader=false
+        },
+        setSheetId:(state,action)=>{
+            console.log(action)
+            state.sheet = action.payload
         }
     }
 })
 
-export const { userExists, userNotExists } = authSlice.actions;
+export const { userExists, userNotExists,setSheetId } = authSlice.actions;
 export default authSlice.reducer;

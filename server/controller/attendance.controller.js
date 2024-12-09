@@ -53,18 +53,17 @@ const createAttendanceSheet = async (req, res, next) => {
 
         // Find students for the standard
         const students = await userModel.find({ class:standard });
-        // console.log(students)
-        // Create new attendance sheet
+        
         const newSheet = await attendanceModel.create({
             standard,
             date: formattedDate,
             students: students.map(student => ({
                 details: student._id,
-                status: 'absent' // Default status
+                status: 'absent' 
             }))
         });
 
-        // Populate the created sheet
+        
         const populatedSheet = await attendanceModel.findById(newSheet._id).populate("students.details","name email");
 
         return res.status(201).json({
@@ -119,7 +118,8 @@ const markMyAttendance = async (req, res, next) => {
 const sendCodeToStudent = async (req, res, next) => {
     try {
         const { _id } = req.body
-        const sheet = await findById(_id)
+        
+        const sheet = await attendanceModel.findById(_id)
         if (!sheet) return next(new ApiError("No Record Found", 404))
         sheet.students.forEach(async ({ details }) => {
             const student = await userModel.findById(details)

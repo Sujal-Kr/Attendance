@@ -3,19 +3,16 @@ import React, { useState } from 'react'
 import AttendanceSheet from '../components/shared/AttendanceSheet'
 import axios from 'axios'
 import { server } from '../constants/config'
+import { setSheetId } from '../redux/slices/auth'
+import { useDispatch } from 'react-redux'
 
 const Attendance = () => {
     // const [students, setStudents] = useState([])
     const [attendanceData, setAttendanceData] = useState({})
     const [sheet,setSheet]=useState([])
     // const {sheet,loading:sheetLoading,error:sheetError}=useLoadAttendanceSheet(standard);
-
-    const handleAttendanceChange = (studentId, value) => {
-        setAttendanceData(prev => ({
-            ...prev,
-            [studentId]: value
-        }))
-    }
+    const dispatch = useDispatch()
+    
 
     const handleSubmitAttendance = () => {
         console.log(attendanceData)
@@ -33,6 +30,8 @@ const Attendance = () => {
             console.log(data)
             if(data.success){
               setSheet(data.sheet)
+              console.log("Data",data)
+              dispatch(setSheetId(500))
             }
           } catch (error) {
             console.log(error.response.data.message || error.message)
@@ -66,7 +65,7 @@ const Attendance = () => {
                             </button>
                         </form>
                     </div>
-                        <AttendanceSheet sheet={sheet?.students}/>
+                        <AttendanceSheet sheet={sheet}/>
                 </div>
             </div>
         </div>
