@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios	 from "axios";
 import React from "react";
 import { toast } from 'react-hot-toast';
 import { server } from "../../constants/config";
@@ -9,7 +9,6 @@ const AttendanceSheet = ({ sheet }) => {
         e.preventDefault()
         const id = toast.loading("Sending Code")
         try {
-            console.log(sheet)
             const { data } = await axios.post(`${server}/api/admin/attendance/send-code`, { _id:sheet._id }, { withCredentials: true })
             if (data.success) {
                 toast.success("Code Sent!" ,{id} )
@@ -27,7 +26,7 @@ const AttendanceSheet = ({ sheet }) => {
             <h2 className="text-center text-3xl font-bold text-gray-800 mb-6">
                 Attendance Sheet
             </h2>
-            <form>
+            <form className="font-mono">
                 <table className="min-w-full border-collapse border border-gray-300 mb-4">
                     <thead>
                         <tr className="bg-gray-200">
@@ -40,7 +39,7 @@ const AttendanceSheet = ({ sheet }) => {
                         {sheet?.students?.map((student, index) => (
                             <tr
                                 key={index}
-                                className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                                className={`hover:bg-pink-100 ${index % 2 === 0 ? "bg-white" : "bg-gray-50"}`}
                             >
                                 <td className="border border-gray-300 p-3 text-gray-700">
                                     {student?.details?.name}
@@ -48,16 +47,26 @@ const AttendanceSheet = ({ sheet }) => {
                                 <td className="border border-gray-300 p-3 text-gray-700">
                                     {student?.details?.email}
                                 </td>
-                                <td className="border border-gray-300 p-3">
+                                <td className="border border-gray-300 p-3 capitalize">
                                     {student?.status}
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-                <div>
-                    <button onClick={handleSendCode}>Send Code</button>
-                    <button onClick={handleSubmitAttendance}>Submit</button>
+                <div className="flex justify-between mt-4">
+                    <button 
+                        onClick={handleSendCode} 
+                        className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
+                    >
+                        Send Code
+                    </button>
+                    <button 
+                        onClick={handleSubmitAttendance} 
+                        className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 transition duration-200"
+                    >
+                        Submit
+                    </button>
                 </div>
             </form>
         </div>

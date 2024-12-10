@@ -5,6 +5,7 @@ import { server } from '../../constants/config'
 import { Link, useLocation } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import { userNotExists } from '../../redux/slices/auth'
+import { User } from 'lucide-react'
 
 const Header = () => {
   const { pathname } = useLocation()
