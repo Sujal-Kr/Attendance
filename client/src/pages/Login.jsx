@@ -32,49 +32,46 @@ function Login() {
 
 	return (
 		<div className="min-h-screen flex items-center justify-center bg-signup-background">
-			<div className="max-w-md w-full space-y-8 p-10 bg-white rounded-lg shadow-lg">
+			<div className="max-w-xs w-full rounded-xl space-y-8 p-8 shadow-lg border border-gray-300">
 				<div>
-					<h2 className="text-center text-4xl font-bold text-gray-800">
-						Sign in to your account
+					<h2 className="text-center  custom-gradient  text-2xl">
+						Welcome To SmartRoll
 					</h2>
 				</div>
-				<form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-					<div className="rounded-md shadow-sm -space-y-px">
-						<div>
-							<input
+				<form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+					<div className="rounded-md shadow-sm flex flex-col gap-3 text-xs">
+					<input
 								name="email"
 								type="email"
 								required
-								className="appearance-none rounded-md relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm"
+								className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm"
 								placeholder="Email address"
 							/>
-						</div>
-						<div>
-							<input
+						<input
 								name="password"
 								type="password"
 								required
-								className="appearance-none rounded-md relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm"
+								className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm"
 								placeholder="Password"
 							/>
-						</div>
 					</div>
 
 					<div>
 						<button
 							type="submit"
-							className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
+							className="btn w-full"
 						>
-							Sign in
+							Login
 						</button>
 					</div>
 				</form>
-				<div className="text-center">
+				<div className="text-center text-xs text-gray-500">
+				Don't have an account?
 					<Link
 						to="/signup"
-						className="text-blue-600 hover:text-blue-500 text-sm"
+						className="text-primary hover:text-primary/80 "
 					>
-						Don't have an account? Sign up
+						 Sign up
 					</Link>
 				</div>
 			</div>

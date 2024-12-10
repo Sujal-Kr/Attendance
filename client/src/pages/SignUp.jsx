@@ -36,10 +36,10 @@ function SignUp() {
 
   
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-200 to-blue-300 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-6 p-8 bg-white rounded-xl shadow-lg border border-gray-300">
+    <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-xs w-full  p-8 bg-white rounded-xl shadow-lg border border-gray-300">
         <div className="text-center">
-          <h2 className="mt-4 text-3xl font-bold text-gray-800">
+          <h2 className="mt-4 text-3xl custom-gradient">
             Create Account
           </h2>
           <p className="mt-2 text-sm text-gray-600">
@@ -88,15 +88,15 @@ function SignUp() {
 
           <button
             type="submit"
-            className="w-full flex justify-center py-2 px-4 text-sm border border-transparent rounded-lg shadow-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition duration-200"
+            className="btn w-full"
           >
             Create Account
           </button>
         </form>
 
-        <div className="text-center text-xs">
+        <div className="text-center text-xs my-5">
           <span className="text-gray-600">Already have an account?</span>{' '}
-          <Link to="/login" className="font-medium text-purple-600 hover:text-purple-500 transition duration-150">
+          <Link to="/login" className="font-medium text-primary hover:text-primary/80  transition duration-150">
             Sign in
           </Link>
         </div>
