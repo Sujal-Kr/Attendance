@@ -30,7 +30,7 @@ const Header = () => {
 
   return (
     <div className='p-5 flex justify-between items-center'>
-      <p className='text-3xl custom-gradient font-semibold'>Smart Roll</p>
+      <p className='text-lg md:text-3xl custom-gradient font-semibold'>Smart Roll</p>
       {
         user ? <button onClick={handleLogout} className='btn'>Logout</button> :
           <Link to='/login' className='btn'>Login</Link>

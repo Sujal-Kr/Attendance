@@ -83,26 +83,29 @@ const createAttendanceSheet = async (req, res, next) => {
 const markMyAttendance = async (req, res, next) => {
     try {
         const { _id, code } = req.body
+        console.log(code)
         const sheet = await attendanceModel.findById(_id)
         if (!sheet) {
             return next(new ApiError("No Record Found", 404))
         }
         const student = await userModel.findById(req._id)
-
+        
         if (!student) {
             return next(new ApiError("No Student Found", 404))
         }
-
         if (code != student.code) {
             return next(new ApiError("Wrong Code", 404))
         }
 
-        sheet.students = sheet.students.map((students) => {
-            return {
-                details: students.details,
-                status: "present"
+        sheet.students = sheet.students.map((student) => {
+            if (student.details.toString() === req._id.toString()) {
+                return {
+                    details:student.details,
+                    status: "present",
+                };
             }
-        })
+            return student;
+        });
 
         await sheet.save()
 

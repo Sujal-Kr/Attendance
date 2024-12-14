@@ -10,7 +10,7 @@ const Attendance = () => {
     const [attendanceData, setAttendanceData] = useState({})
     const [sheet, setSheet] = useState([])
     const dispatch = useDispatch()
-    
+
     const handleSubmitAttendance = () => {
         console.log(attendanceData)
     }
@@ -18,7 +18,7 @@ const Attendance = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formdata = new FormData(e.target)
-        
+
         try {
             const { data } = await axios.post(`${server}/api/admin/create-attendance`, {
                 standard: parseInt(formdata.get("class"))
@@ -37,25 +37,22 @@ const Attendance = () => {
 
     return (
         <div>
-            <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-3xl mx-auto">
+            <div className="  py-12 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-3xl mx-auto ">
                     <div className="bg-white rounded-xl shadow-lg p-8">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-                            Take Attendance
-                        </h2>
 
-                        <form onSubmit={handleSubmit} className="mb-8">
+                        <form onSubmit={handleSubmit} className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
                             <input
                                 type="text"
                                 name="class"
                                 placeholder="Enter class name (e.g., 10A)"
-                                className="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                             />
                             <button
                                 type='submit'
-                                className='px-4 my-4 text-sm py-2 rounded-md shadow bg-blue-600 text-white hover:bg-blue-700 transition duration-200'
+                                className='btn !px-8 w-full sm:w-fit'
                             >
-                                Submit
+                                {sheet ? "Refresh" : "Submit"}
                             </button>
                         </form>
                     </div>

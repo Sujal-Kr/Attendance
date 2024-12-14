@@ -1,75 +1,70 @@
-import axios	 from "axios";
+import axios from "axios";
 import React from "react";
 import { toast } from 'react-hot-toast';
 import { server } from "../../constants/config";
 
 const AttendanceSheet = ({ sheet }) => {
-   
+    const list=["Name","Email","Status"]
+
     const handleSendCode = async (e) => {
         e.preventDefault()
         const id = toast.loading("Sending Code")
         try {
-            const { data } = await axios.post(`${server}/api/admin/attendance/send-code`, { _id:sheet._id }, { withCredentials: true })
+            const { data } = await axios.post(`${server}/api/admin/attendance/send-code`, { _id: sheet._id }, { withCredentials: true })
             if (data.success) {
-                toast.success("Code Sent!" ,{id} )
-                
+                toast.success("Code Sent!", { id })
+
             }
         } catch (err) {
-            toast.error(err.response?.data?.message || err.message,  {id} )
+            toast.error(err.response?.data?.message || err.message, { id })
         }
     }
-    const handleSubmitAttendance=()=>{
+    const handleSubmitAttendance = () => {
         console.log("Attendance Submitted")
     }
     return (
-        <div className="w-full p-5 bg-gray-100 rounded-lg shadow-md">
-            <h2 className="text-center text-3xl font-bold text-gray-800 mb-6">
+        <div className="w-full p-6 bg-white rounded-2xl shadow-xl my-10">
+            <h2 className="text-center text-3xl font-extrabold text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text mb-8">
                 Attendance Sheet
             </h2>
-            <form className="font-mono">
-                <table className="min-w-full border-collapse border border-gray-300 mb-4">
-                    <thead>
-                        <tr className="bg-gray-200">
-                            <th className="border border-gray-300 p-3 text-left">Name</th>
-                            <th className="border border-gray-300 p-3 text-left">Email</th>
-                            <th className="border border-gray-300 p-3 text-left">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {sheet?.students?.map((student, index) => (
-                            <tr
+            <form className="font-sans">
+                    <div className="grid grid-cols-3 place-items-center border-b p-2  ">
+                        {
+                            list.map((item,index)=>(
+                                <p key={index}>{item}</p>
+                            ))
+                        }
+                    </div>
+                    <div className="flex flex-col gap-4 py-4">
+                        {sheet?.students?.map((student, index) =>
+                            <div
                                 key={index}
-                                className={`hover:bg-pink-100 ${index % 2 === 0 ? "bg-white" : "bg-gray-50"}`}
+                                className={"grid grid-cols-3 place-items-center  "}
                             >
-                                <td className="border border-gray-300 p-3 text-gray-700">
-                                    {student?.details?.name}
-                                </td>
-                                <td className="border border-gray-300 p-3 text-gray-700">
-                                    {student?.details?.email}
-                                </td>
-                                <td className="border border-gray-300 p-3 capitalize">
-                                    {student?.status}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                <div className="flex justify-between mt-4">
-                    <button 
-                        onClick={handleSendCode} 
-                        className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
+                                <p >{student?.details?.name}</p>
+                                <p >{student?.details?.email}</p>
+                                <p className="bg-primary text-xs p-1 rounded-full text-white px-2 ">{student?.status}</p>
+                            </div>
+                        )}
+                    </div>
+
+                <div className="flex justify-between mt-6">
+                    <button
+                        onClick={handleSendCode}
+                        className="btn !font-semibold"
                     >
                         Send Code
                     </button>
-                    <button 
-                        onClick={handleSubmitAttendance} 
-                        className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 transition duration-200"
+                    <button
+                        onClick={handleSubmitAttendance}
+                        className="btn !font-semibold"
                     >
                         Submit
                     </button>
                 </div>
             </form>
         </div>
+
     );
 };
 

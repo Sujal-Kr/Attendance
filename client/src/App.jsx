@@ -12,36 +12,34 @@ import { useSelector } from 'react-redux'
 import ProtectRoute from './components/auth/ProtectRoute'
 import Attendance from './pages/Attendance'
 const App = () => {
-  const { user,loader } = useSelector((state) => state.auth)
+  const { user, loader } = useSelector((state) => state.auth)
   useLoadProfile()
-  
-  if(loader){
+
+  if (loader) {
     return (
       <div>Loading...</div>
     )
   }
   return (
     <SocketProvider>
-      <div>
+      <div className="">
         <Toaster />
         <Header />
         <Routes>
-
           <Route element={<ProtectRoute user={user} redirect={'/login'} />}>
-            <Route path='/' element={<Home />} />
-            <Route path='/admin' element={<Admin />} />
-            <Route path='/attendance' element={<Attendance />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/attendance" element={<Attendance />} />
           </Route>
-
           <Route element={<ProtectRoute user={!user} />}>
-            <Route path='/login' element={<Login />} />
-            <Route path='/signup' element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
           </Route>
-
-
         </Routes>
+
       </div>
     </SocketProvider>
+
   )
 }
 

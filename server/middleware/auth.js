@@ -25,7 +25,7 @@ const protectRoute = async (req, res, next) => {
     } catch (err) {
         return res.status(500).json({
             success: false,
-            message: err.message
+            message: "Protect Route"+err.message
         })
     }
 }
@@ -36,6 +36,8 @@ const socketAuthentication = async (socket, next) => {
         const cookie = cookieParser.JSONCookies(socket.handshake.headers.cookie)
         if (!cookie) return next(new Error("user not logged in"))
         const token = cookie.split("=")[1]
+
+        // console.log(token)
         const payload = jwt.verify(token, process.env.JWT_SECRET)
         if (!payload) return next(new Error("Couldn't verify token"))
         const user = await userModel.findById(payload._id)
@@ -43,7 +45,7 @@ const socketAuthentication = async (socket, next) => {
         socket.user = user._id
         next()
     } catch (error) {
-        console.log(error.message)
+        console.log("Socket Auth"+error.message)
         return next(new Error(error))
     }
 }
